@@ -1,0 +1,92 @@
+problema 1
+#include <stdio.h>
+
+int elimina_cifre_impare(int n);
+
+int main() {
+    int n;
+    printf("Introduceti un numar natural: ");
+    scanf("%d", &n);
+    int rezultat = elimina_cifre_impare(n);
+    printf("Numarul obtinut prin eliminarea cifrelor impare este: %d\n", rezultat);
+    return 0;
+}
+
+int elimina_cifre_impare(int n) {
+    if (n == 0) {
+        return 0;
+    } else {
+        int ultima_cifra = n % 10;
+        if (ultima_cifra % 2 == 0) {
+            return 10 * elimina_cifre_impare(n / 10) + ultima_cifra;
+        } else {
+            return elimina_cifre_impare(n / 10);
+        }
+    }
+}
+
+
+problema 2
+#include <stdio.h>
+
+int manna_pnueli(int a) {
+	if (a >= 12) return a - 1;
+	else return manna_pnueli(manna_pnueli(a + 2));
+}
+
+void main() {
+	int a;
+	printf("numarul pentru a calcula functia Manna-Pnueli este ");
+	scanf_s("%d", &a);
+	printf("Rezultatul functiei este: %d", manna_pnueli(a));
+}
+
+
+problema 3
+#include <stdio.h>
+
+unsigned int cmmdc(unsigned int a, unsigned int b) {
+    if (b == 0) {
+        return a;
+    }
+    return cmmdc(b, a % b);
+}
+
+int main() {
+    unsigned int a, b;
+    printf("Introduceti doua numere naturale: ");
+    scanf("%u %u", &a, &b);
+    printf("CMMDC dintre %u si %u este: %u\n", a, b, cmmdc(a, b));
+    return 0;
+}
+
+
+problema 4
+#include <stdio.h>
+
+int count_zeros(int n) {
+  if (n == 0) {
+    return 1;
+  }
+  else if (n < 10) {
+    return 0;
+  }
+  else {
+    int digit = n % 10;
+    if (digit == 0) {
+      return 1 + count_zeros(n / 10);
+    }
+    else {
+      return count_zeros(n / 10);
+    }
+  }
+}
+
+int main() {
+  int n;
+  printf("Introduceti numarul: ");
+  scanf("%d", &n);
+  int result = count_zeros(n);
+  printf("Numarul de cifre egale cu zero in numarul %d este: %d\n", n, result);
+  return 0;
+}
