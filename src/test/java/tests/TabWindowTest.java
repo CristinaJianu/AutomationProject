@@ -1,5 +1,7 @@
 package tests;
 
+import helpMethods.ElementMethods;
+import helpMethods.TabMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -24,37 +26,30 @@ public class TabWindowTest {
         //facem browser-ul maximize
         driver.manage().window().maximize();
 
+        ElementMethods elementMethods = new ElementMethods(driver);
+
+        TabMethods tabMethods = new TabMethods(driver);
+
         WebElement alertsFrameWindowsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", alertsFrameWindowsMenu);
+        elementMethods.clickJsElement(alertsFrameWindowsMenu);
 
         WebElement browserWindowsSubMenu = driver.findElement(By.xpath("//span[text()='Browser Windows']"));
-        js.executeScript("arguments[0].click();", browserWindowsSubMenu);
-
+        elementMethods.clickJsElement(browserWindowsSubMenu);
 
         WebElement tabButtonElement = driver.findElement(By.id("tabButton"));
-        js.executeScript("arguments[0].click();", tabButtonElement);
+        elementMethods.clickJsElement(tabButtonElement);
 
-        System.out.println("URL ul paginii curente este " + driver.getCurrentUrl());
-        List<String> tabList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(tabList.get(1));
-        System.out.println("URL ul paginii curente este " + driver.getCurrentUrl());
+        tabMethods.switchSpecificTab(1);
+        tabMethods.closeCurrentTab();
 
-        driver.close();
-
-        driver.switchTo().window(tabList.get(0));
-        System.out.println("URL ul paginii curente este " + driver.getCurrentUrl());
+        tabMethods.switchSpecificTab(0);
 
         WebElement windowButtonElement = driver.findElement(By.id("windowButton"));
-        js.executeScript("arguments[0].click();", windowButtonElement);
+        elementMethods.clickJsElement(windowButtonElement);
 
-        System.out.println("URL ul paginii curente este " + driver.getCurrentUrl());
-        List<String> windowList = new ArrayList<>(driver.getWindowHandles());
-        driver.switchTo().window(windowList.get(1));
-        System.out.println("URL ul paginii curente este " + driver.getCurrentUrl());
-
-        driver.close();
-        driver.quit();
+        tabMethods.switchSpecificTab(1);
+        tabMethods.closeCurrentTab();
+        tabMethods.quitTab();
 
     }
 }
