@@ -1,5 +1,9 @@
 package tests;
 
+import helpMethods.AlertMethods;
+import helpMethods.ElementMethods;
+import helpMethods.TabMethods;
+import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -16,6 +20,7 @@ public class PracticeFormTest {
 
     @Test
 
+
     public void metodaTest() {
         // deschidem un browser
         driver = new EdgeDriver();
@@ -24,49 +29,54 @@ public class PracticeFormTest {
         //facem browser-ul maximize
         driver.manage().window().maximize();
 
+        ElementMethods elementMethods = new ElementMethods(driver);
+
+
         WebElement formsMenu = driver.findElement(By.xpath("//h5[text()='Forms']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", formsMenu);
+        elementMethods.clickJsElement(formsMenu);
 
         WebElement practiceFormSubMenu = driver.findElement(By.xpath("//span[text()='Practice Form']"));
-        js.executeScript("arguments[0].click();", practiceFormSubMenu);
+        elementMethods.clickJsElement(practiceFormSubMenu);
 
         WebElement firstNameElement = driver.findElement(By.id("firstName"));
-        String firstNameValue = "Cristina";
-        js.executeScript("arguments[0].click();", firstNameElement);
-        firstNameElement.sendKeys(firstNameValue);
-        //scriem in firstnameElement valoarea din first name value
+        String firstNameValue="Cristina";
+        elementMethods.clickJsElement(firstNameElement);
+        elementMethods.fillElement(firstNameElement,firstNameValue);
+        //scriem in firstnameElement valoarea din firstname value
 
         WebElement lastNameElement = driver.findElement(By.id("lastName"));
-        String lastNameValue = "Jianu";
-        lastNameElement.sendKeys(lastNameValue);
+        String lastNameValue="Jianu";
+        elementMethods.fillElement(lastNameElement,lastNameValue);
 
         WebElement emailElement = driver.findElement(By.id("userEmail"));
-        String emailValue = "cristinajianu@gmail.com";
-        emailElement.sendKeys(emailValue);
+        String emailValue="cristinajianu@gmail.com";
+        elementMethods.fillElement(emailElement,emailValue);
 
-        List<WebElement> genderOptionsList = driver.findElements(By.xpath("//input[@name='gender']"));
+//        List<WebElement> genderOptionsList = driver.findElements(By.xpath("//input[@name='gender']/../label"));
+//        String genderValue = "Male";
+
+        List<WebElement> genderOptionsList = driver.findElements(By.xpath("//label[contains(@for,'gender-radio-1')]/../label"));
         String genderValue = "Male";
 
         switch (genderValue) {
             case "Male":
-                js.executeScript("arguments[0].click();", genderOptionsList.get(0));
+                elementMethods.clickJsElement(genderOptionsList.get(0));
                 break;
             case "Female":
-                js.executeScript("arguments[0].click();", genderOptionsList.get(1));
+                elementMethods.clickJsElement(genderOptionsList.get(1));
                 break;
             case "Other":
-                js.executeScript("arguments[0].click();", genderOptionsList.get(2));
+                elementMethods.clickJsElement(genderOptionsList.get(2));
                 break;
         }
 
         WebElement mobileNumberElement = driver.findElement(By.id("userNumber"));
-        String mobileNumberValue = "0766867832";
-        mobileNumberElement.sendKeys(mobileNumberValue);
+        String mobileNumberValue="0766867832";
+        elementMethods.fillElement(mobileNumberElement,mobileNumberValue);
 
         //dateOfBirth intereaction
         WebElement dateOfBirthElement = driver.findElement(By.id("dateOfBirthInput"));
-        js.executeScript("arguments[0].click();", dateOfBirthElement);
+        elementMethods.clickJsElement(dateOfBirthElement);
 
         WebElement monthElement= driver.findElement((By.className("react-datepicker__month-select")));
         Select monthSelect=new Select(monthElement);
@@ -83,7 +93,7 @@ public class PracticeFormTest {
         for (int i=0; i<daysList.size(); i++)
         {
             if(daysList.get(i).getText().equals(dayValue)){
-                js.executeScript("arguments[0].click();", daysList.get(i));
+                elementMethods.clickJsElement(daysList.get(i));
                 break;
             }
         }
@@ -91,8 +101,7 @@ public class PracticeFormTest {
         WebElement subjectElement = driver.findElement(By.id("subjectsInput"));
         List<String> subjectValues = Arrays.asList("Accounting", "Maths", "Biology");
         for (int index = 0; index < subjectValues.size(); index++) {
-            subjectElement.sendKeys(subjectValues.get(index));
-            subjectElement.sendKeys(Keys.ENTER);
+            elementMethods.fillPressElement(subjectElement,subjectValues.get(index),Keys.ENTER);
         }
 
         List<String> hobbiesValues = Arrays.asList("Sports");
@@ -101,37 +110,35 @@ public class PracticeFormTest {
         for (int index = 0; index < hobbiesOptionsList.size(); index++) {
             String currentText = hobbiesOptionsList.get(index).getText();
             if (hobbiesValues.contains(currentText)) {
-                js.executeScript("arguments[0].click();", hobbiesOptionsList.get(index));
+                elementMethods.clickJsElement(hobbiesOptionsList.get(index));
             }
         }
 
 
         WebElement pictureElement = driver.findElement(By.id("uploadPicture"));
         File file = new File("src/test/resources/Jianu Cristina.txt");
-        pictureElement.sendKeys(file.getAbsolutePath());
+        elementMethods.fillElement(pictureElement,file.getAbsolutePath());
 
 
         WebElement currentAddressElement = driver.findElement(By.id("currentAddress"));
         String currentAddressValue = "Bucuresti, sector 2";
-        currentAddressElement.sendKeys(currentAddressValue);
+        elementMethods.fillElement(currentAddressElement,currentAddressValue);
 
         WebElement stateElement = driver.findElement(By.xpath("//div[text()='Select State']"));
-        js.executeScript("arguments[0].click();", stateElement);
+        elementMethods.clickJsElement(stateElement);
 
 
         WebElement stateInputElement = driver.findElement(By.id("react-select-3-input"));
-        String stateValue = "NCR";
-        stateInputElement.sendKeys(stateValue);
-        stateInputElement.sendKeys(Keys.ENTER);
+        String stateInputValue="NCR" ;
+        elementMethods.fillPressElement(stateInputElement,stateInputValue,Keys.ENTER);
 
 
         WebElement cityInputElement = driver.findElement(By.id("react-select-4-input"));
-        String cityValue = "DELHI";
-        cityInputElement.sendKeys(cityValue);
-        cityInputElement.sendKeys(Keys.ENTER);
+        String cityInputValue="DELHI" ;
+        elementMethods.fillPressElement(cityInputElement,cityInputValue,Keys.ENTER);
 
         WebElement submitElement = driver.findElement(By.id("submit"));
-        js.executeScript("arguments[0].click();", submitElement);
+        elementMethods.clickJsElement(submitElement);
 
 
         //validam datele introduse
@@ -154,11 +161,11 @@ public class PracticeFormTest {
         Assert.assertEquals(labelList.get(9).getText(), "State and City");
 
         Assert.assertEquals(valuesList.get(0).getText(), firstNameValue + " " + lastNameValue);
-        Assert.assertEquals(valuesList.get(1).getText(), emailValue);
-        Assert.assertEquals(valuesList.get(2).getText(), genderValue);
+       Assert.assertEquals(valuesList.get(1).getText(), emailValue);
+       Assert.assertEquals(valuesList.get(2).getText(), genderValue);
         Assert.assertEquals(valuesList.get(3).getText(), mobileNumberValue);
         //Assert.assertEquals(valuesList.get(4), "19 August,2024");
-//        Assert.assertEquals(valuesList.get(5).getText(), subjectValues);
+       // Assert.assertEquals(valuesList.get(5).getText(), subjectValues);
 
        // Assert.assertEquals(valuesList.get(6), hobbiesValues);
 //        Assert.assertEquals(valuesList.get(7), file);

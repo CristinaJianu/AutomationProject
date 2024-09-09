@@ -5,13 +5,12 @@ import helpMethods.ElementMethods;
 import helpMethods.FramesMethods;
 import helpMethods.TabMethods;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.Test;
 
-public class FramesTest {
+public class NestedFramesTest {
 
     public WebDriver driver;
 
@@ -26,27 +25,29 @@ public class FramesTest {
         driver.manage().window().maximize();
 
         ElementMethods elementMethods = new ElementMethods(driver);
-        FramesMethods framesMethods=new FramesMethods(driver);
+        TabMethods tabMethods = new TabMethods(driver);
+        AlertMethods alertMethods = new AlertMethods(driver);
+        FramesMethods framesMethods = new FramesMethods(driver);
 
         WebElement alertsFrameWindowsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
         elementMethods.clickJsElement(alertsFrameWindowsMenu);
 
-        WebElement framesSubMenu = driver.findElement(By.xpath("//span[text()='Frames']"));
-        elementMethods.clickJsElement(framesSubMenu);
+        WebElement nestedFramesSubMenu = driver.findElement(By.xpath("//span[text()='Nested Frames']"));
+        elementMethods.clickJsElement(nestedFramesSubMenu);
 
-        //ne mutam pe un iframe
+        //ne mutam pe un iframe e fereastra parinte
         framesMethods.switchToSpecificIFrame("frame1");
 
-        WebElement sampleTextElement = driver.findElement(By.id("sampleHeading"));
-        System.out.println(sampleTextElement.getText());
+        //mergem in fereastra copi; si il gasim dupa tag name
+        WebElement childFrameElement = driver.findElement(By.tagName("iframe"));
+        framesMethods.switchToSpecificIFrameByElement(childFrameElement);
+        //ne am mutat in fereastra mica
 
-        framesMethods.switchToParentIFrame();
+        WebElement childSampleTextElement = driver.findElement(By.tagName("p"));
+        //cautam primul paragraf de text elementul p
+        System.out.println(childSampleTextElement.getText());
+        //extragem si afisam textul
 
-        framesMethods.switchToSpecificIFrame("frame2");
 
-        WebElement secondSampleTextElement = driver.findElement(By.id("sampleHeading"));
-        System.out.println(secondSampleTextElement.getText());
     }
 }
-
-//temaa nested frames (test nou ) interact cu meniu si sub meniu 
