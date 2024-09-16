@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.Test;
+import pages.AlertFrameWindowPage;
+import pages.HomePage;
+import pages.TabWindowPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,6 @@ public class TabWindowTest {
     public WebDriver driver;
 
     @Test
-
     public void metodaTest() {
         // deschidem un browser
         driver = new EdgeDriver();
@@ -26,30 +28,14 @@ public class TabWindowTest {
         //facem browser-ul maximize
         driver.manage().window().maximize();
 
-        ElementMethods elementMethods = new ElementMethods(driver);
+        HomePage homePage=new HomePage(driver);
+        homePage.clickAlertFrameWindow();
 
-        TabMethods tabMethods = new TabMethods(driver);
+        AlertFrameWindowPage alertFrameWindowPage=new AlertFrameWindowPage(driver);
+        alertFrameWindowPage.clickBrowserWindowsSubMenu();
 
-        WebElement alertsFrameWindowsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        elementMethods.clickJsElement(alertsFrameWindowsMenu);
-
-        WebElement browserWindowsSubMenu = driver.findElement(By.xpath("//span[text()='Browser Windows']"));
-        elementMethods.clickJsElement(browserWindowsSubMenu);
-
-        WebElement tabButtonElement = driver.findElement(By.id("tabButton"));
-        elementMethods.clickJsElement(tabButtonElement);
-
-        tabMethods.switchSpecificTab(1);
-        tabMethods.closeCurrentTab();
-
-        tabMethods.switchSpecificTab(0);
-
-        WebElement windowButtonElement = driver.findElement(By.id("windowButton"));
-        elementMethods.clickJsElement(windowButtonElement);
-
-        tabMethods.switchSpecificTab(1);
-        tabMethods.closeCurrentTab();
-        tabMethods.quitTab();
-
+        TabWindowPage tabWindowPage=new TabWindowPage(driver);
+        tabWindowPage.dealTabProcess();
+        tabWindowPage.dealWindowProcess();
     }
 }

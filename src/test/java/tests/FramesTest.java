@@ -10,6 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.Test;
+import pages.AlertFrameWindowPage;
+import pages.FramesPage;
+import pages.HomePage;
 
 public class FramesTest {
 
@@ -25,27 +28,15 @@ public class FramesTest {
         //facem browser-ul maximize
         driver.manage().window().maximize();
 
-        ElementMethods elementMethods = new ElementMethods(driver);
-        FramesMethods framesMethods=new FramesMethods(driver);
+        HomePage homePage=new HomePage(driver);
+        homePage.clickAlertFrameWindow();
 
-        WebElement alertsFrameWindowsMenu = driver.findElement(By.xpath("//h5[text()='Alerts, Frame & Windows']"));
-        elementMethods.clickJsElement(alertsFrameWindowsMenu);
+        AlertFrameWindowPage alertFrameWindowPage=new AlertFrameWindowPage(driver);
+        alertFrameWindowPage.clickFramesSubMenu();
 
-        WebElement framesSubMenu = driver.findElement(By.xpath("//span[text()='Frames']"));
-        elementMethods.clickJsElement(framesSubMenu);
-
-        //ne mutam pe un iframe
-        framesMethods.switchToSpecificIFrame("frame1");
-
-        WebElement sampleTextElement = driver.findElement(By.id("sampleHeading"));
-        System.out.println(sampleTextElement.getText());
-
-        framesMethods.switchToParentIFrame();
-
-        framesMethods.switchToSpecificIFrame("frame2");
-
-        WebElement secondSampleTextElement = driver.findElement(By.id("sampleHeading"));
-        System.out.println(secondSampleTextElement.getText());
+        FramesPage framesPage=new FramesPage(driver);
+        framesPage.dealFirstIFrame();
+        framesPage.dealSecondIFrame();
     }
 }
 
