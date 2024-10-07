@@ -1,44 +1,21 @@
 package tests;
 
-import helpMethods.AlertMethods;
-import helpMethods.ElementMethods;
-import helpMethods.TabMethods;
-import org.openqa.selenium.*;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import pages.AlertFrameWindowPage;
 import pages.AlertPage;
 import pages.HomePage;
+import sharedData.SharedData;
 
-import java.time.Duration;
-
-//        //wait implicit nu fct la alerte
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-public class AlertsTest {
-
-    public WebDriver driver;
-
+public class AlertsTest extends SharedData {
     @Test
-
     public void metodaTest() {
-        // deschidem un browser
-        driver = new EdgeDriver();
-        //accesam un url
-        driver.get("https://demoqa.com/");
-        //facem browser-ul maximize
-        driver.manage().window().maximize();
-
-        HomePage homePage=new HomePage(driver);
+        HomePage homePage=new HomePage(getDriver());
         homePage.clickAlertFrameWindow();
 
-        AlertFrameWindowPage alertFrameWindowPage=new AlertFrameWindowPage(driver);
+        AlertFrameWindowPage alertFrameWindowPage=new AlertFrameWindowPage(getDriver());
         alertFrameWindowPage.clickAlert();
 
-        AlertPage alertPage=new AlertPage(driver);
+        AlertPage alertPage=new AlertPage(getDriver());
         alertPage.dealAlertProcess("this is a test");
-
     }
 }

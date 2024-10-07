@@ -1,30 +1,18 @@
 package pages;
 
-import helpMethods.ElementMethods;
-import helpMethods.FramesMethods;
-import helpMethods.TabMethods;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class FramesPage {
-    public WebDriver driver;
-    public ElementMethods elementMethods;
-    public FramesMethods framesMethods;
+public class FramesPage extends BasePage{
+    @FindBy(id = "sampleHeading")
+    private WebElement sampleTextElement;
+    @FindBy(id = "sampleHeading")
+    private WebElement secondSampleTextElement;
 
     public FramesPage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods=new ElementMethods(this.driver);
-        framesMethods=new FramesMethods(this.driver);
-        PageFactory.initElements(this.driver,this);
+        super(driver);
     }
-
-    @FindBy(id = "sampleHeading")
-    public WebElement sampleTextElement;
-    @FindBy(id = "sampleHeading")
-    public WebElement secondSampleTextElement;
 
     public void dealFirstIFrame()
     {

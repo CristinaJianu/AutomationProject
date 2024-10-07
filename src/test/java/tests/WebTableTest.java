@@ -1,47 +1,28 @@
 package tests;
 
-import helpMethods.AlertMethods;
-import helpMethods.ElementMethods;
-import helpMethods.TabMethods;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.ElementsPage;
 import pages.HomePage;
 import pages.WebTablePage;
+import sharedData.SharedData;
 
-import java.util.List;
-
-public class WebTableTest {
-    public WebDriver driver;
-
+public class WebTableTest extends SharedData {
     @Test
     public void metodaTest() {
-        // deschidem un browser
-        driver = new EdgeDriver();
-        //accesam un url
-        driver.get("https://demoqa.com/");
-        //facem browser-ul maximize
-        driver.manage().window().maximize();
-
-        HomePage homePage=new HomePage(driver);
+        HomePage homePage=new HomePage(getDriver());
         homePage.clickElements();
 
-        ElementsPage elementsPage=new ElementsPage(driver);
+        ElementsPage elementsPage=new ElementsPage(getDriver());
         elementsPage.clickWebTable();
 
         String firstNameValue = "Cristina";
         String lastNameValue = "Jianu";
-        String emailValue = "cristinajianu@gmail.com";
+        String emailValue = "cristinajianu"+System.currentTimeMillis()+"@gmail.com";
         String ageValue = "20";
         String salaryValue = "2000";
         String departmentValue = "IT";
 
-        WebTablePage webTablePage=new WebTablePage(driver);
+        WebTablePage webTablePage=new WebTablePage(getDriver());
         webTablePage.createProcess(firstNameValue,lastNameValue,emailValue,ageValue,
                 salaryValue,departmentValue,3);
 
@@ -56,7 +37,5 @@ public class WebTableTest {
                 editSalaryValue,editDepartmentValue,3);
 
         webTablePage.deleteProcess(3);
-
-        driver.quit();
     }
 }

@@ -1,62 +1,53 @@
 package pages;
 
-import helpMethods.ElementMethods;
-import helpMethods.TabMethods;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.List;
 
-public class WebTablePage {
-    public WebDriver driver;
-    public ElementMethods elementMethods;
+public class WebTablePage extends BasePage{
+    @FindBy(xpath = "//div[@class='rt-tbody']/div/div[@class='rt-tr -odd' or @class='rt-tr -even']")
+    private List<WebElement> tableContentList;
+    @FindBy(id = "addNewRecordButton")
+    private WebElement addElement;
+    @FindBy(id = "firstName")
+    private WebElement firstNameElement;
+    @FindBy(id = "lastName")
+    private WebElement lastNameElement;
+    @FindBy(id = "userEmail")
+    private WebElement emailElement;
+    @FindBy(id = "age")
+    private WebElement ageElement;
+    @FindBy(id = "salary")
+    private WebElement salaryElement;
+    @FindBy(id = "department")
+    private WebElement departmentElement;
+    @FindBy(id = "submit")
+    private WebElement submitElement;
+    @FindBy(xpath = "//div[@class='rt-tbody']/div/div[@class='rt-tr -odd' or @class='rt-tr -even']")
+    private List<WebElement> newTableContentList;
+    @FindBy(id = "edit-record-4")
+    private WebElement editElement;
+    @FindBy(id = "firstName")
+    private WebElement editFirstNameElement;
+    @FindBy(id = "lastName")
+    private WebElement editLastNameElement;
+    @FindBy(id = "userEmail")
+    private WebElement editEmailElement;
+    @FindBy(id = "age")
+    private WebElement editAgeElement;
+    @FindBy(id = "salary")
+    private WebElement editSalaryElement;
+    @FindBy(id = "department")
+    private WebElement editDepartmentElement;
+    @FindBy(id = "delete-record-4")
+    private WebElement deleteElement;
 
     public WebTablePage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods = new ElementMethods(this.driver);
-        PageFactory.initElements(this.driver, this);
+        super(driver);
     }
-
-    @FindBy(xpath = "//div[@class='rt-tbody']/div/div[@class='rt-tr -odd' or @class='rt-tr -even']")
-    public List<WebElement> tableContentList;
-    @FindBy(id = "addNewRecordButton")
-    public WebElement addElement;
-    @FindBy(id = "firstName")
-    public WebElement firstNameElement;
-    @FindBy(id = "lastName")
-    public WebElement lastNameElement;
-    @FindBy(id = "userEmail")
-    public WebElement emailElement;
-    @FindBy(id = "age")
-    public WebElement ageElement;
-    @FindBy(id = "salary")
-    public WebElement salaryElement;
-    @FindBy(id = "department")
-    public WebElement departmentElement;
-    @FindBy(id = "submit")
-    public WebElement submitElement;
-    @FindBy(xpath = "//div[@class='rt-tbody']/div/div[@class='rt-tr -odd' or @class='rt-tr -even']")
-    public List<WebElement> newTableContentList;
-    @FindBy(id = "edit-record-4")
-    public WebElement editElement;
-    @FindBy(id = "firstName")
-    public WebElement editFirstNameElement;
-    @FindBy(id = "lastName")
-    public WebElement editLastNameElement;
-    @FindBy(id = "userEmail")
-    public WebElement editEmailElement;
-    @FindBy(id = "age")
-    public WebElement editAgeElement;
-    @FindBy(id = "salary")
-    public WebElement editSalaryElement;
-    @FindBy(id = "department")
-    public WebElement editDepartmentElement;
-    @FindBy(id = "delete-record-4")
-    public WebElement deleteElement;
 
     public void createProcess(String firstNameValue, String lastNameValue, String emailValue,
                               String ageValue, String salaryValue, String departmentValue, int tableSize) {

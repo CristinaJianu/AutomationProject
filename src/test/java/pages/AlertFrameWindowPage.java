@@ -1,39 +1,37 @@
 package pages;
 
-import helpMethods.ElementMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class AlertFrameWindowPage {
-    public WebDriver driver;
-    public ElementMethods elementMethods;
-
-    public AlertFrameWindowPage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods=new ElementMethods(this.driver);
-        PageFactory.initElements(this.driver,this);
-    }
+public class AlertFrameWindowPage extends BasePage {
 
     @FindBy(xpath = "//span[text()='Alerts']")
-    public WebElement alertsSubMenu;
+    private WebElement alertsSubMenu;
     @FindBy(xpath = "//span[text()='Browser Windows']")
-    public WebElement browserWindowsSubMenu;
+    private WebElement browserWindowsSubMenu;
     @FindBy(xpath = "//span[text()='Frames']")
-    public WebElement framesSubMenu;
+    private WebElement framesSubMenu;
+    @FindBy(xpath = "//span[text()='Nested Frames']")
+    private WebElement nestedFramesSubMenu;
 
-    public void clickAlert()
-    {
+    public AlertFrameWindowPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public void clickAlert() {
         elementMethods.clickJsElement(alertsSubMenu);
     }
-    public void clickBrowserWindowsSubMenu()
-    {
+
+    public void clickBrowserWindowsSubMenu() {
         elementMethods.clickJsElement(browserWindowsSubMenu);
     }
-    public void clickFramesSubMenu()
-    {
+
+    public void clickFramesSubMenu() {
         elementMethods.clickJsElement(framesSubMenu);
     }
 
+    public void clickNestedFramesSubMenu() {
+        elementMethods.clickJsElement(nestedFramesSubMenu);
+    }
 }

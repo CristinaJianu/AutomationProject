@@ -17,14 +17,10 @@ public class FramesMethods {
 
     public void switchToParentIFrame() {
         driver.switchTo().parentFrame();
-
-
     }
 
-    public void switchToSpecificIFrameByElement(WebElement element) {
+    public void switchToSpecificIFrame(WebElement element) {
         driver.switchTo().frame(element);
-
-
     }
 
 }

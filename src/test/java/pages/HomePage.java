@@ -1,26 +1,20 @@
 package pages;
 
-import helpMethods.ElementMethods;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
-
-    public WebDriver driver;
-    public ElementMethods elementMethods;
+public class HomePage extends BasePage {
+    @FindBy(xpath = "//h5[text()='Alerts, Frame & Windows']")
+    private WebElement alertsFrameWindowsMenu;
+    @FindBy(xpath = "//h5[text()='Elements']")
+    private WebElement elementsMenu;
+    @FindBy(xpath = "//h5[text()='Forms']")
+    private WebElement formsMenu;
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        elementMethods=new ElementMethods(this.driver);
-        PageFactory.initElements(this.driver,this);
+        super(driver);
     }
-
-    @FindBy(xpath = "//h5[text()='Alerts, Frame & Windows']")
-    public WebElement alertsFrameWindowsMenu;
-    @FindBy(xpath = "//h5[text()='Elements']")
-    public WebElement elementsMenu;
 
     public void clickAlertFrameWindow()
     {
@@ -30,6 +24,11 @@ public class HomePage {
     public void clickElements()
     {
         elementMethods.clickJsElement(elementsMenu);
+    }
+
+    public void clickForms()
+    {
+        elementMethods.clickJsElement(formsMenu);
     }
 
 }
