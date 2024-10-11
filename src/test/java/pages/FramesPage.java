@@ -6,9 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class FramesPage extends BasePage{
     @FindBy(id = "sampleHeading")
-    private WebElement sampleTextElement;
+    public WebElement sampleTextElement;
     @FindBy(id = "sampleHeading")
-    private WebElement secondSampleTextElement;
+    public WebElement secondSampleTextElement;
 
     public FramesPage(WebDriver driver) {
         super(driver);

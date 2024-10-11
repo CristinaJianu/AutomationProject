@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ElementsPage extends BasePage{
     @FindBy(xpath = "//span[text()='Web Tables']")
-    private WebElement webTableSubMenu;
+    public WebElement webTableSubMenu;
 
     public ElementsPage(WebDriver driver) {
         super(driver);

@@ -1,0 +1,16 @@
+{"firstName":"Cristina",
+  "lastName":"Jianu",
+  "userEmail":"cristinajianu@gmail.com",
+  "gender":"Male",
+  "mobileNumber":"0766867832",
+  "month": "January",
+  "year": "2030",
+  "day": "15",
+  "subjects": ["Accounting", "Maths", "English"],
+  "hobbies": ["Sports", "Music"],
+  "currentAddress": "Bucuresti, nr.02",
+  "state": "NCR",
+  "city": "Delhi",
+  "pathFile": "src/test/resources/Jianu Cristina.txt"
+}
+

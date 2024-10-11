@@ -1,5 +1,6 @@
 package pages;
 
+import modelObject.PracticeFormModel;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,21 +56,17 @@ public class PracticeFormsPage extends BasePage {
         super(driver);
     }
 
-    public void fillEntireForm(String firstNameValue, String lastNameValue, String emailValue,
-                               String genderValue, String mobileNumberValue, String monthValue,
-                               String yearValue, String dayValue, List<String> subjectValues,
-                               List<String> hobbiesValues, String pathFile, String currentAddressValue,
-                               String stateInputValue, String cityInputValue) {
+    public void fillEntireForm(PracticeFormModel testData) {
 
-        elementMethods.fillElement(firstNameElement, firstNameValue);
-        loggerUtility.infoLog("The user fills first name field with "+firstNameValue+" value");
-        elementMethods.fillElement(lastNameElement, lastNameValue);
-        loggerUtility.infoLog("The user fills last name field with "+lastNameValue+" value");
+        elementMethods.fillElement(firstNameElement, testData.getFirstName());
+        loggerUtility.infoLog("The user fills first name field with "+testData.getFirstName()+" value");
+        elementMethods.fillElement(lastNameElement, testData.getLastName());
+        loggerUtility.infoLog("The user fills last name field with "+testData.getLastName()+" value");
 
-        elementMethods.fillElement(emailElement, emailValue);
-        loggerUtility.infoLog("The user fills email field with "+emailValue+" value");
+        elementMethods.fillElement(emailElement, testData.getUserEmail());
+        loggerUtility.infoLog("The user fills email field with "+testData.getUserEmail()+" value");
 
-        switch (genderValue) {
+        switch (testData.getGender()) {
             case "Male":
                 elementMethods.clickJsElement(genderOptionsList.get(0));
                 loggerUtility.infoLog("The user clicks on gender options list");
@@ -86,52 +83,52 @@ public class PracticeFormsPage extends BasePage {
                 break;
         }
 
-        elementMethods.fillElement(mobileNumberElement, mobileNumberValue);
-        loggerUtility.infoLog("The user fills mobile number field with "+mobileNumberValue+" value");
+        elementMethods.fillElement(mobileNumberElement, testData.getMobileNumber());
+        loggerUtility.infoLog("The user fills mobile number field with "+testData.getMobileNumber()+" value");
 
         elementMethods.clickJsElement(dateOfBirthElement);
         loggerUtility.infoLog("The user clicks the date of birth element");
 
-        elementMethods.selectDropdownElement(monthElement, monthValue);
-        loggerUtility.infoLog("The user selects month element with "+monthValue+" value");
+        elementMethods.selectDropdownElement(monthElement, testData.getMonth());
+        loggerUtility.infoLog("The user selects month element with "+testData.getMonth()+" value");
 
-        elementMethods.selectDropdownElement(yearElement, yearValue);
-        loggerUtility.infoLog("The user selects year element with "+yearValue+" value");
+        elementMethods.selectDropdownElement(yearElement, testData.getYear());
+        loggerUtility.infoLog("The user selects year element with "+testData.getYear()+" value");
 
         for (int i = 0; i < daysList.size(); i++) {
-            if (daysList.get(i).getText().equals(dayValue)) {
+            if (daysList.get(i).getText().equals(testData.getDay())) {
                 elementMethods.clickJsElement(daysList.get(i));
                 loggerUtility.infoLog("The user clicks on days list");
                 break;
             }
         }
-        for (int index = 0; index < subjectValues.size(); index++) {
-            elementMethods.fillPressElement(subjectElement, subjectValues.get(index), Keys.ENTER);
-            loggerUtility.infoLog("The user fills subject element with "+subjectValues.get(index)+" value");
+        for (int index = 0; index < testData.getSubjects().size(); index++) {
+            elementMethods.fillPressElement(subjectElement, testData.getSubjects().get(index), Keys.ENTER);
+            loggerUtility.infoLog("The user fills subject element with "+testData.getSubjects().get(index)+" value");
 
         }
         for (int index = 0; index < hobbiesOptionsList.size(); index++) {
             String currentText = hobbiesOptionsList.get(index).getText();
-            if (hobbiesValues.contains(currentText)) {
+            if (testData.getHobbies().contains(currentText)) {
                 elementMethods.clickJsElement(hobbiesOptionsList.get(index));
                 loggerUtility.infoLog("The user clicks on hobbies list");
             }
         }
-        File file = new File(pathFile);
+        File file = new File(testData.getPathFile());
         elementMethods.fillElement(pictureElement, file.getAbsolutePath());
         loggerUtility.infoLog("The user selects picture element with "+file.getAbsolutePath());
 
-        elementMethods.fillElement(currentAddressElement, currentAddressValue);
-        loggerUtility.infoLog("The user fills current address field with "+currentAddressValue+" value");
+        elementMethods.fillElement(currentAddressElement, testData.getCurrentAddress());
+        loggerUtility.infoLog("The user fills current address field with "+testData.getCurrentAddress()+" value");
 
         elementMethods.clickJsElement(stateElement);
         loggerUtility.infoLog("The user clicks on state element");
 
-        elementMethods.fillPressElement(stateInputElement, stateInputValue, Keys.ENTER);
-        loggerUtility.infoLog("The user fills state input field with "+stateInputValue+" value");
+        elementMethods.fillPressElement(stateInputElement, testData.getState(), Keys.ENTER);
+        loggerUtility.infoLog("The user fills state input field with "+testData.getState()+" value");
 
-        elementMethods.fillPressElement(cityInputElement, cityInputValue, Keys.ENTER);
-        loggerUtility.infoLog("The user fills city input field with "+cityInputValue+" value");
+        elementMethods.fillPressElement(cityInputElement, testData.getCity(), Keys.ENTER);
+        loggerUtility.infoLog("The user fills city input field with "+testData.getCity()+" value");
 
         elementMethods.clickJsElement(submitElement);
         loggerUtility.infoLog("The user clicks on submit element");
@@ -139,10 +136,7 @@ public class PracticeFormsPage extends BasePage {
 
 
 
-        public void validateFormValues (String firstNameValue, String lastNameValue, String emailValue,
-                String genderValue, String mobileNumberValue, List < String > subjectValues,
-                List < String > hobbiesValues, String pathFile, String currentAddressValue,
-                String stateInputValue, String cityInputValue){
+        public void validateFormValues (PracticeFormModel testData){
 
         elementMethods.waitVisibleElement(thankYouElement);
             Assert.assertEquals(thankYouElement.getText(), "Thanks for submitting the form");
@@ -178,39 +172,39 @@ public class PracticeFormsPage extends BasePage {
             Assert.assertEquals(labelList.get(9).getText(), "State and City");
             loggerUtility.infoLog("The user validates the State and City");
 
-            Assert.assertEquals(valuesList.get(0).getText(), firstNameValue + " " + lastNameValue);
-            loggerUtility.infoLog("The user validates the presence of "+firstNameValue+ " and "+ lastNameValue+" values into table content");
+            Assert.assertEquals(valuesList.get(0).getText(), testData.getFirstName() + " " + testData.getLastName());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getFirstName()+ " and "+ testData.getLastName()+" values into table content");
 
-            Assert.assertEquals(valuesList.get(1).getText(), emailValue);
-            loggerUtility.infoLog("The user validates the presence of "+emailValue+  "value into table content");
+            Assert.assertEquals(valuesList.get(1).getText(), testData.getUserEmail());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getUserEmail()+  "value into table content");
 
-            Assert.assertEquals(valuesList.get(2).getText(), genderValue);
-            loggerUtility.infoLog("The user validates the presence of "+genderValue+  "value into table content");
+            Assert.assertEquals(valuesList.get(2).getText(), testData.getGender());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getGender()+  "value into table content");
 
-            Assert.assertEquals(valuesList.get(3).getText(), mobileNumberValue);
-            loggerUtility.infoLog("The user validates the presence of "+mobileNumberValue+  "value into table content");
+            Assert.assertEquals(valuesList.get(3).getText(), testData.getMobileNumber());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getMobileNumber()+  "value into table content");
 
             Assert.assertEquals(valuesList.get(4).getText(), "19 August,2024");
             loggerUtility.infoLog("The user validates the presence date of birth -19 August,2024");
 
-            String subjectValue =String.join(", ",subjectValues);
-            Assert.assertEquals(valuesList.get(5).getText(), subjectValues);
-            loggerUtility.infoLog("The user validates the presence of "+subjectValues+  "value into table content");
+            String subjectValue =String.join(", ",testData.getSubjects());
+            Assert.assertEquals(valuesList.get(5).getText(), testData.getSubjects());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getSubjects()+  "value into table content");
 
-            String hobbyValue =String.join(", ",hobbiesValues);
-            Assert.assertEquals(valuesList.get(6).getText(), hobbiesValues);
-            loggerUtility.infoLog("The user validates the presence of "+hobbiesValues+  "value into table content");
+            String hobbyValue =String.join(", ",testData.getHobbies());
+            Assert.assertEquals(valuesList.get(6).getText(), testData.getHobbies());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getHobbies()+  "value into table content");
 
 
-            File file = new File(pathFile);
+            File file = new File(testData.getPathFile());
             Assert.assertEquals(valuesList.get(7).getText(), file.getName());
-            loggerUtility.infoLog("The user validates the presence of "+file+  "value into table content");
+            loggerUtility.infoLog("The user validates the presence of "+testData.getPathFile()+  "value into table content");
 
-            Assert.assertEquals(valuesList.get(8).getText(), currentAddressValue);
-            loggerUtility.infoLog("The user validates the presence of "+currentAddressValue+  "value into table content");
+            Assert.assertEquals(valuesList.get(8).getText(), testData.getCurrentAddress());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getCurrentAddress()+  "value into table content");
 
-            Assert.assertEquals(valuesList.get(9).getText(), stateInputValue +" "+ cityInputValue);
-            loggerUtility.infoLog("The user validates the presence of "+stateInputValue+ " and "+ cityInputValue+" values into table content");
+            Assert.assertEquals(valuesList.get(9).getText(), testData.getState() +" "+ testData.getCity());
+            loggerUtility.infoLog("The user validates the presence of "+testData.getState()+ " and "+ testData.getCity()+" values into table content");
 
         }
     }

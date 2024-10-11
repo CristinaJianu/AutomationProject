@@ -1,0 +1,14 @@
+{
+  "firstName": "Cristina",
+  "lastName": "Jianu",
+  "userEmail": "cristinajianu@gmail.com",
+  "age ": "20",
+  "salary ": "2000",
+  "department ": "IT",
+  "editFirstName ": "Ioaana",
+  "editLastName ": "Calin",
+  "editEmail ": "ioanacalin@gmail.com",
+  "editAge": "28",
+  "editSalary ": "20800",
+  "editDepartment": "HR"
+}

@@ -34,6 +34,4 @@ public class HomePage extends BasePage {
         elementMethods.clickJsElement(elementsMenu);
         loggerUtility.infoLog("The user clicks on Elements menu");
     }
-
-
 }

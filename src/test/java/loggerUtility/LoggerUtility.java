@@ -8,7 +8,7 @@ public class LoggerUtility {
     private Logger logger = LogManager.getLogger();
 
     public void startTest(String testName) {
-        logger.info("************ EXECUTION STARTED: " + testName + " ***********");
+        logger.info("************ EXECUTION STARTED: " + testName + " ************");
     }
 
     public void infoLog(String message) {
@@ -20,7 +20,7 @@ public class LoggerUtility {
     }
 
     public void finishTest(String testName) {
-        logger.info("************ EXECUTION FINISHED: " + testName + " ***********");
+        logger.info("************ EXECUTION FINISHED: " + testName + " ************");
     }
 
 }

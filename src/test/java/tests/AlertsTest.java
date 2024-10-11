@@ -1,5 +1,6 @@
 package tests;
 
+import modelObject.AlertModel;
 import org.testng.annotations.Test;
 import pages.AlertFrameWindowPage;
 import pages.AlertPage;
@@ -9,6 +10,8 @@ import sharedData.Hooks;
 public class AlertsTest extends Hooks {
     @Test
     public void metodaTest() {
+        AlertModel testData = new AlertModel("src/test/resources/inputData/AlertResource.json");
+
         HomePage homePage=new HomePage(getDriver());
         homePage.clickAlertFrameWindow();
 
@@ -16,6 +19,6 @@ public class AlertsTest extends Hooks {
         alertFrameWindowPage.clickAlert();
 
         AlertPage alertPage=new AlertPage(getDriver());
-        alertPage.dealAlertProcess("this is a test");
+        alertPage.dealAlertProcess(testData);
     }
 }

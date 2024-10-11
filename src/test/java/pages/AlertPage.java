@@ -1,5 +1,6 @@
 package pages;
 
+import modelObject.AlertModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +19,7 @@ public class AlertPage extends BasePage{
         super(driver);
     }
 
-    public void dealAlertProcess(String text)
+    public void dealAlertProcess(AlertModel testData)
     {
         elementMethods.clickJsElement(okAlertElement);
         loggerUtility.infoLog("The user clicks on alertOK element");
@@ -41,8 +42,8 @@ public class AlertPage extends BasePage{
         elementMethods.clickJsElement(promtAlertElement);
         loggerUtility.infoLog("The user clicks on AlertPromt element");
 
-        alertMethods.fillAlert(text);
-        loggerUtility.infoLog("The user fills the alert displayed with"+ text+" value and accepts it");
+        alertMethods.fillAlert(testData.getAlertText());
+        loggerUtility.infoLog("The user fills the alert displayed with"+ testData.getAlertText()+" value and accepts it");
 
     }
 }
