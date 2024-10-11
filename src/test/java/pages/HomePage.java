@@ -16,19 +16,24 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    public void clickForms()
+    {
+        elementMethods.clickJsElement(formsMenu);
+        loggerUtility.infoLog("The user clicks on Forms Menu");
+
+
+    }
     public void clickAlertFrameWindow()
     {
         elementMethods.clickJsElement(alertsFrameWindowsMenu);
+        loggerUtility.infoLog("The user clicks on Alert, Frame & Window menu");
     }
 
     public void clickElements()
     {
         elementMethods.clickJsElement(elementsMenu);
+        loggerUtility.infoLog("The user clicks on Elements menu");
     }
 
-    public void clickForms()
-    {
-        elementMethods.clickJsElement(formsMenu);
-    }
 
 }

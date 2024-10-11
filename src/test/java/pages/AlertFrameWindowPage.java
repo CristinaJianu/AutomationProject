@@ -21,17 +21,24 @@ public class AlertFrameWindowPage extends BasePage {
 
     public void clickAlert() {
         elementMethods.clickJsElement(alertsSubMenu);
+        loggerUtility.infoLog("The user clicks on Alerts Submenu");
     }
 
     public void clickBrowserWindowsSubMenu() {
         elementMethods.clickJsElement(browserWindowsSubMenu);
+        loggerUtility.infoLog("The user clicks on Browser Windows Submenu");
+
     }
 
     public void clickFramesSubMenu() {
         elementMethods.clickJsElement(framesSubMenu);
+        loggerUtility.infoLog("The user clicks on Frames Submenu");
+
     }
 
     public void clickNestedFramesSubMenu() {
         elementMethods.clickJsElement(nestedFramesSubMenu);
+        loggerUtility.infoLog("The user clicks on Nested Frames Submenu");
+
     }
 }

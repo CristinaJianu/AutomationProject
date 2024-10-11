@@ -4,18 +4,19 @@ import org.testng.annotations.Test;
 import pages.AlertFrameWindowPage;
 import pages.HomePage;
 import pages.TabWindowPage;
+import sharedData.Hooks;
 import sharedData.SharedData;
 
-public class TabWindowTest extends SharedData {
+public class TabWindowTest extends Hooks {
     @Test
     public void metodaTest() {
-         HomePage homePage=new HomePage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
         homePage.clickAlertFrameWindow();
 
-        AlertFrameWindowPage alertFrameWindowPage=new AlertFrameWindowPage(getDriver());
+        AlertFrameWindowPage alertFrameWindowPage = new AlertFrameWindowPage(getDriver());
         alertFrameWindowPage.clickBrowserWindowsSubMenu();
 
-        TabWindowPage tabWindowPage=new TabWindowPage(getDriver());
+        TabWindowPage tabWindowPage = new TabWindowPage(getDriver());
         tabWindowPage.dealTabProcess();
         tabWindowPage.dealWindowProcess();
     }

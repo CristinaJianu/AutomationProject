@@ -4,12 +4,13 @@ import org.testng.annotations.Test;
 import pages.FormsPage;
 import pages.HomePage;
 import pages.PracticeFormsPage;
+import sharedData.Hooks;
 import sharedData.SharedData;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PracticeFormTest extends SharedData {
+public class PracticeFormTest extends Hooks {
      @Test
     public void metodaTest() {
         HomePage homePage=new HomePage(getDriver());

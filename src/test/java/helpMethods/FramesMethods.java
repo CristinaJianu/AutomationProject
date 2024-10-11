@@ -22,5 +22,4 @@ public class FramesMethods {
     public void switchToSpecificIFrame(WebElement element) {
         driver.switchTo().frame(element);
     }
-
 }

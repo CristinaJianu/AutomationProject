@@ -10,12 +10,20 @@ public class NestedFramesPage extends BasePage{
         super(driver);
     }
 
-    @FindBy(tagName = "//iframe[@srcdoc='<p>Child Iframe</p>]")
-    private WebElement childFrameElement;
+    @FindBy(xpath = "//iframe[@srcdoc='<p>Child Iframe</p>]")
+    private WebElement childIFrameElement;
+    @FindBy(tagName = "p")
+    private WebElement childTextElement;
 
     public void dealNestedFrames(){
         framesMethods.switchToSpecificIFrame("frame1");
-        framesMethods.switchToSpecificIFrame(childFrameElement);
-        System.out.println(childFrameElement.getText());
+        loggerUtility.infoLog("The user switches the focus to a specific parent iFrame");
+
+        framesMethods.switchToSpecificIFrame(childIFrameElement);
+        loggerUtility.infoLog("The user switches the focus to a specific parent child iFrame");
+
+        System.out.println(childTextElement.getText());
+        loggerUtility.infoLog("The user interacts with an element within iframe");
+
     }
 }

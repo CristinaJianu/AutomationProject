@@ -4,9 +4,9 @@ import org.testng.annotations.Test;
 import pages.ElementsPage;
 import pages.HomePage;
 import pages.WebTablePage;
-import sharedData.SharedData;
+import sharedData.Hooks;
 
-public class WebTableTest extends SharedData {
+public class WebTableTest extends Hooks {
     @Test
     public void metodaTest() {
         HomePage homePage=new HomePage(getDriver());

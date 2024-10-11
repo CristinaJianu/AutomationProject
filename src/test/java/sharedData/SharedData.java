@@ -2,8 +2,6 @@ package sharedData;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 
@@ -11,8 +9,7 @@ public class SharedData {
 
     private WebDriver driver;
 
-    @BeforeMethod
-    public void setUpEnvironment(){
+    public void setUpDriver(){
         // deschidem un browser
         driver = new EdgeDriver();
         //accesam un url
@@ -26,9 +23,7 @@ public class SharedData {
         return driver;
     }
 
-    @AfterMethod
-
-    public void clearEnvironment()
+    public void quitDriver()
     {
         driver.quit();
     }

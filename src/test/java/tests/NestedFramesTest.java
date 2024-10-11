@@ -4,9 +4,10 @@ import org.testng.annotations.Test;
 import pages.AlertFrameWindowPage;
 import pages.HomePage;
 import pages.NestedFramesPage;
+import sharedData.Hooks;
 import sharedData.SharedData;
 
-public class NestedFramesTest extends SharedData {
+public class NestedFramesTest extends Hooks {
     @Test
     public void metodaTest() {
         HomePage homePage=new HomePage(getDriver());
